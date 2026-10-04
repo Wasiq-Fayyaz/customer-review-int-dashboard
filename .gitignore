@@ -1,0 +1,15 @@
+# Ignore large CSV data files
+data/*.csv
+*.csv
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore virtual environment
+.venv/
+venv/
+
+# Ignore PyCharm settings
+.idea/
