@@ -1,0 +1,474 @@
+{
+  "overview": {
+    "total_reviews": 49998,
+    "labeled_reviews": 45951,
+    "positive": 38418,
+    "negative": 7533,
+    "neutral": 4047,
+    "average_score": 4.146
+  },
+  "rating_distribution": {
+    "1": 4721,
+    "2": 2812,
+    "3": 4047,
+    "4": 7288,
+    "5": 31130
+  },
+  "top_words": {
+    "positive": [
+      {
+        "word": "like",
+        "count": 16725
+      },
+      {
+        "word": "good",
+        "count": 14065
+      },
+      {
+        "word": "taste",
+        "count": 13109
+      },
+      {
+        "word": "great",
+        "count": 12960
+      },
+      {
+        "word": "love",
+        "count": 12488
+      },
+      {
+        "word": "one",
+        "count": 12212
+      },
+      {
+        "word": "flavor",
+        "count": 12094
+      },
+      {
+        "word": "product",
+        "count": 10576
+      },
+      {
+        "word": "tea",
+        "count": 10420
+      },
+      {
+        "word": "coffee",
+        "count": 9997
+      },
+      {
+        "word": "food",
+        "count": 8695
+      },
+      {
+        "word": "make",
+        "count": 7803
+      },
+      {
+        "word": "get",
+        "count": 7759
+      },
+      {
+        "word": "dog",
+        "count": 7306
+      },
+      {
+        "word": "would",
+        "count": 7225
+      },
+      {
+        "word": "really",
+        "count": 6610
+      },
+      {
+        "word": "time",
+        "count": 6581
+      },
+      {
+        "word": "best",
+        "count": 5919
+      },
+      {
+        "word": "much",
+        "count": 5826
+      },
+      {
+        "word": "also",
+        "count": 5784
+      }
+    ],
+    "negative": [
+      {
+        "word": "like",
+        "count": 4257
+      },
+      {
+        "word": "taste",
+        "count": 3803
+      },
+      {
+        "word": "product",
+        "count": 3569
+      },
+      {
+        "word": "one",
+        "count": 2736
+      },
+      {
+        "word": "would",
+        "count": 2436
+      },
+      {
+        "word": "flavor",
+        "count": 2275
+      },
+      {
+        "word": "good",
+        "count": 1948
+      },
+      {
+        "word": "coffee",
+        "count": 1875
+      },
+      {
+        "word": "food",
+        "count": 1796
+      },
+      {
+        "word": "dog",
+        "count": 1752
+      },
+      {
+        "word": "tea",
+        "count": 1719
+      },
+      {
+        "word": "get",
+        "count": 1617
+      },
+      {
+        "word": "dont",
+        "count": 1593
+      },
+      {
+        "word": "even",
+        "count": 1516
+      },
+      {
+        "word": "bag",
+        "count": 1372
+      },
+      {
+        "word": "buy",
+        "count": 1357
+      },
+      {
+        "word": "box",
+        "count": 1348
+      },
+      {
+        "word": "much",
+        "count": 1312
+      },
+      {
+        "word": "really",
+        "count": 1309
+      },
+      {
+        "word": "time",
+        "count": 1286
+      }
+    ]
+  },
+  "distinctive_words": {
+    "negative": [
+      "refund",
+      "worst",
+      "expired",
+      "disappointing",
+      "fda",
+      "threw",
+      "disappointment",
+      "trash",
+      "return",
+      "awful",
+      "menadione",
+      "nespresso",
+      "yuck",
+      "horrible",
+      "disgusting"
+    ],
+    "positive": [
+      "peppercorn",
+      "hooked",
+      "pleasantly",
+      "satisfies",
+      "tastiest",
+      "complement",
+      "strainer",
+      "pickmeup",
+      "magnesium",
+      "downside",
+      "calming",
+      "wonderfully",
+      "beautifully",
+      "yummy",
+      "watcher"
+    ]
+  },
+  "topics": {
+    "negative": [
+      [
+        "like",
+        "taste",
+        "chocolate",
+        "chip",
+        "bar",
+        "product",
+        "would",
+        "good"
+      ],
+      [
+        "like",
+        "one",
+        "sugar",
+        "product",
+        "would",
+        "taste",
+        "ingredient",
+        "get"
+      ],
+      [
+        "taste",
+        "like",
+        "coffee",
+        "tea",
+        "flavor",
+        "cup",
+        "drink",
+        "good"
+      ],
+      [
+        "product",
+        "amazon",
+        "box",
+        "bag",
+        "one",
+        "item",
+        "order",
+        "price"
+      ],
+      [
+        "dog",
+        "food",
+        "product",
+        "treat",
+        "cat",
+        "made",
+        "chicken",
+        "one"
+      ]
+    ],
+    "positive": [
+      [
+        "coffee",
+        "tea",
+        "cup",
+        "flavor",
+        "like",
+        "taste",
+        "good",
+        "one"
+      ],
+      [
+        "treat",
+        "dog",
+        "like",
+        "drink",
+        "sugar",
+        "taste",
+        "juice",
+        "flavor"
+      ],
+      [
+        "bag",
+        "great",
+        "product",
+        "good",
+        "amazon",
+        "price",
+        "one",
+        "like"
+      ],
+      [
+        "food",
+        "love",
+        "dog",
+        "one",
+        "like",
+        "cat",
+        "good",
+        "use"
+      ],
+      [
+        "taste",
+        "like",
+        "great",
+        "good",
+        "love",
+        "product",
+        "chocolate",
+        "mix"
+      ]
+    ]
+  },
+  "top_adjectives": {
+    "positive": [
+      {
+        "word": "good",
+        "count": 1407
+      },
+      {
+        "word": "great",
+        "count": 1334
+      },
+      {
+        "word": "best",
+        "count": 514
+      },
+      {
+        "word": "little",
+        "count": 511
+      },
+      {
+        "word": "hot",
+        "count": 432
+      },
+      {
+        "word": "ive",
+        "count": 389
+      },
+      {
+        "word": "much",
+        "count": 377
+      },
+      {
+        "word": "delicious",
+        "count": 348
+      },
+      {
+        "word": "free",
+        "count": 333
+      },
+      {
+        "word": "many",
+        "count": 299
+      }
+    ],
+    "negative": [
+      {
+        "word": "good",
+        "count": 187
+      },
+      {
+        "word": "bad",
+        "count": 97
+      },
+      {
+        "word": "much",
+        "count": 96
+      },
+      {
+        "word": "hot",
+        "count": 88
+      },
+      {
+        "word": "little",
+        "count": 87
+      },
+      {
+        "word": "great",
+        "count": 84
+      },
+      {
+        "word": "different",
+        "count": 67
+      },
+      {
+        "word": "ive",
+        "count": 66
+      },
+      {
+        "word": "new",
+        "count": 58
+      },
+      {
+        "word": "best",
+        "count": 58
+      }
+    ]
+  },
+  "model_comparison": [
+    {
+      "model": "Naive Bayes",
+      "accuracy": 0.8833,
+      "macro_f1": 0.7061,
+      "negative_f1": 0.4779
+    },
+    {
+      "model": "Logistic Regression",
+      "accuracy": 0.8891,
+      "macro_f1": 0.8257,
+      "negative_f1": 0.7206
+    },
+    {
+      "model": "Linear SVM",
+      "accuracy": 0.8941,
+      "macro_f1": 0.8292,
+      "negative_f1": 0.724
+    }
+  ],
+  "best_model": "Linear SVM",
+  "sample_negative_reviews": [
+    {
+      "summary": "Not as Advertised",
+      "text": "Product arrived labeled as Jumbo Salted Peanuts...the peanuts were actually small sized unsalted. Not sure if this was an error or if the vendor intended to represent the product as \"Jumbo\"."
+    },
+    {
+      "summary": "My Cats Are Not Fans of the New Food",
+      "text": "My cats have been happily eating Felidae Platinum for more than two years. I just got a new bag and the shape of the food is different. They tried the new food when I first put it in their bowls and now the bowls sit full and the kitties will not touch the food. I've noticed similar reviews related to formula changes in the past. Unfortunately, I now need to find a new food that my cats will eat."
+    },
+    {
+      "summary": "Nasty No flavor",
+      "text": "The candy is just red , No flavor . Just  plan and chewy .  I would never buy them again"
+    },
+    {
+      "summary": "Don't like it",
+      "text": "This oatmeal is not good. Its mushy, soft, I don't like it. Quaker Oats is the way to go."
+    },
+    {
+      "summary": "No Tea Flavor",
+      "text": "No tea flavor at all. Just whole brunch of artifial flavors. It is not returnable. I wasted 20+ bucks."
+    },
+    {
+      "summary": "Bad",
+      "text": "I fed this to my Golden Retriever and he hated it.  He wouldn't eat it, and when he did, it gave him terrible diarrhea.  We will not be buying this again.  It's also super expensive."
+    },
+    {
+      "summary": "Rip off Price",
+      "text": "These singles sell for $2.50 - $3.36 at the store for 1 box of 24 singles. I'm not sure why Amazon is selling it for $9.99 for a box of 24 singles.  Hazelnut coffee creamer is my favorite, but truly this is not a good buy."
+    },
+    {
+      "summary": "Tasteless but low calorie",
+      "text": "Seriously this product was as tasteless as they come. There are much better tasting products out there but at 100 calories its better than a special k bar or cookie snack pack. You just have to season it or combine it with something else to share the flavor."
+    },
+    {
+      "summary": "Not Banana Runts",
+      "text": "Besides being smaller than runts, they look the same and have the same consistency.  Unfortunately, they taste nothing like banana runts...nor do they even taste good.  Yucky stuff.  Trying to return with vendor."
+    },
+    {
+      "summary": "Price cannot be correct",
+      "text": "Hey, the description says 360 grams - that is roughly 13 ounces at under $4.00 per can. No way - that is the approximate price for a 100 gram can."
+    }
+  ]
+}

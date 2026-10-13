@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review Intelligence</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --text:#1f2933; --muted:#667085; --border:#e4e7ec;
+          --pos:#2a9d8f; --neg:#e76f51; --accent:#264653; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#12161b; --card:#1b2128; --text:#e6e9ee; --muted:#9aa4b2; --border:#2b333d; --accent:#8ecae6; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:system-ui,-apple-system,Segoe UI,sans-serif; background:var(--bg); color:var(--text); }
+  header { padding:20px 16px; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; max-width:1200px; margin:0 auto; }
+  h1 { font-size:1.4rem; margin:0; }
+  a.btn, button { background:var(--accent); color:var(--bg); border:0; border-radius:8px; padding:9px 14px; font-size:.9rem; cursor:pointer; text-decoration:none; }
+  main { max-width:1200px; margin:0 auto; padding:0 16px 40px; display:grid; gap:16px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; }
+  .kpi .v { font-size:1.6rem; font-weight:700; } .kpi .l { color:var(--muted); font-size:.85rem; }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }
+  h2 { font-size:1rem; margin:0 0 12px; }
+  img { max-width:100%; border-radius:8px; }
+  canvas { max-height:280px; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th,td { text-align:left; padding:8px; border-bottom:1px solid var(--border); }
+  .pill { display:inline-block; padding:2px 9px; border-radius:99px; font-size:.8rem; margin:2px; background:var(--bg); border:1px solid var(--border); }
+  .pos { color:var(--pos); } .neg { color:var(--neg); }
+  textarea { width:100%; min-height:90px; padding:10px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text); font:inherit; }
+  #result { margin-top:10px; font-weight:600; }
+  .err { padding:16px; color:var(--neg); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Customer Review Intelligence</h1>
+  <a class="btn" href="/api/report">Download PDF report</a>
+</header>
+<main id="app"><div class="card">Loading…</div></main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// For a separately hosted frontend, set API to e.g. "http://127.0.0.1:8000"
+const API = "";
+const $ = (h) => { const t = document.createElement("template"); t.innerHTML = h.trim(); return t.content.firstChild; };
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+async function init() {
+  const app = document.getElementById("app");
+  let d;
+  try {
+    const r = await fetch(API + "/api/summary");
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    d = await r.json();
+  } catch (e) { app.innerHTML = `<div class="card err">Could not load data: ${esc(e.message)}</div>`; return; }
+
+  const o = d.overview;
+  const kpi = (v, l) => `<div class="card kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`;
+  app.innerHTML = `
+    <section class="kpis">
+      ${kpi(o.total_reviews.toLocaleString(), "Reviews analysed")}
+      ${kpi(o.average_score, "Average rating")}
+      ${kpi(`<span class="pos">${(o.positive / o.labeled_reviews * 100).toFixed(1)}%</span>`, "Positive")}
+      ${kpi(`<span class="neg">${(o.negative / o.labeled_reviews * 100).toFixed(1)}%</span>`, "Negative")}
+      ${kpi(d.best_model, "Best classifier")}
+    </section>
+    <section class="grid2">
+      <div class="card"><h2>Rating distribution</h2><canvas id="ratings"></canvas></div>
+      <div class="card"><h2>Model comparison</h2><canvas id="models"></canvas></div>
+    </section>
+    <section class="grid2">
+      <div class="card"><h2>Top words — positive</h2><canvas id="posWords"></canvas></div>
+      <div class="card"><h2>Top words — negative</h2><canvas id="negWords"></canvas></div>
+    </section>
+    <section class="grid2">
+      <div class="card"><h2>Positive word cloud</h2><img src="${API}/outputs/wordcloud_positive.png" alt="Positive word cloud"></div>
+      <div class="card"><h2>Negative word cloud</h2><img src="${API}/outputs/wordcloud_negative.png" alt="Negative word cloud"></div>
+    </section>
+    <section class="grid2">
+      <div class="card"><h2>Complaint themes</h2>${d.topics.negative.map((t,i)=>`<p><b>Topic ${i+1}</b><br>${t.map(w=>`<span class="pill">${esc(w)}</span>`).join("")}</p>`).join("")}</div>
+      <div class="card"><h2>Praise themes</h2>${d.topics.positive.map((t,i)=>`<p><b>Topic ${i+1}</b><br>${t.map(w=>`<span class="pill">${esc(w)}</span>`).join("")}</p>`).join("")}</div>
+    </section>
+    <section class="card"><h2>Words that separate negative from positive reviews</h2>
+      <p class="neg"><b>Negative:</b> ${d.distinctive_words.negative.map(esc).join(", ")}</p>
+      <p class="pos"><b>Positive:</b> ${d.distinctive_words.positive.map(esc).join(", ")}</p></section>
+    <section class="card"><h2>Try the classifier</h2>
+      <textarea id="txt" placeholder="Type or paste a review…"></textarea><br><br>
+      <button id="go">Classify</button><div id="result"></div></section>
+    <section class="card"><h2>Sample 1-star reviews</h2><table><tr><th>Summary</th><th>Review</th></tr>
+      ${d.sample_negative_reviews.map(r => `<tr><td>${esc(r.summary)}</td><td>${esc(r.text)}</td></tr>`).join("")}</table></section>`;
+
+  const color = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const bar = (id, labels, data, c, horizontal = false) => new Chart(document.getElementById(id), {
+    type: "bar", data: { labels, datasets: [{ data, backgroundColor: c }] },
+    options: { indexAxis: horizontal ? "y" : "x", plugins: { legend: { display: false } } } });
+
+  bar("ratings", Object.keys(d.rating_distribution), Object.values(d.rating_distribution), "#457b9d");
+  bar("posWords", d.top_words.positive.slice(0,12).map(x=>x.word), d.top_words.positive.slice(0,12).map(x=>x.count), color("--pos"), true);
+  bar("negWords", d.top_words.negative.slice(0,12).map(x=>x.word), d.top_words.negative.slice(0,12).map(x=>x.count), color("--neg"), true);
+  new Chart(document.getElementById("models"), { type: "bar", data: {
+    labels: d.model_comparison.map(m => m.model),
+    datasets: [["accuracy","#457b9d"],["macro_f1","#2a9d8f"],["negative_f1","#e76f51"]]
+      .map(([k, c]) => ({ label: k, data: d.model_comparison.map(m => m[k]), backgroundColor: c })) },
+    options: { scales: { y: { min: 0, max: 1 } } } });
+
+  document.getElementById("go").onclick = async () => {
+    const out = document.getElementById("result");
+    const text = document.getElementById("txt").value;
+    out.textContent = "…";
+    try {
+      const r = await fetch(API + "/api/predict", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
+      const j = await r.json();
+      if (!r.ok) throw new Error(j.detail);
+      out.innerHTML = `<span class="${j.sentiment === "positive" ? "pos" : "neg"}">${j.sentiment.toUpperCase()}</span> <span style="color:var(--muted);font-weight:400">(${esc(j.model)}, score ${j.score?.toFixed(2)})</span>`;
+    } catch (e) { out.innerHTML = `<span class="neg">${esc(e.message)}</span>`; }
+  };
+}
+init();
+</script>
+</body>
+</html>

@@ -52,5 +52,12 @@ first_review_scores = tfidf_matrix[0].toarray()[0]
 top_indices = first_review_scores.argsort()[-10:][::-1]
 
 print("\n Top 10 TF-IDF words in review")
-for idx in top_indices:
-    print(f"   {features_name[idx] < 30} score: {first_review_scores[idx]:.4f}")
+for idx,item in enumerate(top_indices):
+    print(f"   {features_name[item]:<30} score: {first_review_scores[item]:.4f}")
+
+
+print("\n...Executing Word2Vec...\n")
+
+sentence = [str(text).split() for text in df['cleaned']]
+print(f"Total Sentences Compared: {len(sentence)}")
+print(f"Sample Sentence:        {sentence[0][:10]}")
